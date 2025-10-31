@@ -1,12 +1,15 @@
 steps:
   
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build',
-           "--build-arg",
-          'REACT_APP_API_URL=https://hf-bank-backend-524103119199.us-central1.run.app/api/v1',
-	         '-t',
-           'us-central1-docker.pkg.dev/${PROJECT_ID}/hui-feng-frontend-bank/frontend-image:${SHORT_SHA}',
-           '.']
+    args: [
+          'build',
+          '-t', 
+          'us-central1-docker.pkg.dev/${PROJECT_ID}/hui-feng-frontend-bank/frontend-image:${SHORT_SHA}',
+          '--build-arg',
+          'REACT_APP_API_URL=http://34.23.232.166',
+          '-f',
+          'Dockerfile-before-https-first',
+          '.']
  
   
   - name: 'gcr.io/cloud-builders/docker'
