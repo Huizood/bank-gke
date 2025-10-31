@@ -4,7 +4,7 @@ steps:
     args: [
           'build',
           '-t', 
-          'us-central1-docker.pkg.dev/${PROJECT_ID}/hui-f-gke-repo/frontend-image:${SHORT_SHA}',
+          'us-central1-docker.pkg.dev/${PROJECT_ID}/hui-f-gke-repo/bank-frontend:v1',
           '--build-arg',
           'REACT_APP_API_URL=http://34.23.232.166',
           '-f',
@@ -13,7 +13,7 @@ steps:
  
   
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'us-central1-docker.pkg.dev/${PROJECT_ID}/hui-f-gke-repo/frontend-image:${SHORT_SHA}']
+    args: ['push', 'us-central1-docker.pkg.dev/${PROJECT_ID}/hui-f-gke-repo/bank-frontend:v1']
  
   
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -21,7 +21,7 @@ steps:
     args:
       [
         'run', 'deploy', 'hf-bank-frontend',
-        '--image', 'us-central1-docker.pkg.dev/${PROJECT_ID}/hui-f-gke-repo/frontend-image:${SHORT_SHA}',
+        '--image', 'us-central1-docker.pkg.dev/${PROJECT_ID}/hui-f-gke-repo/bank-frontend:v1',
         '--region', 'us-central1',
         '--allow-unauthenticated'      ]
  
@@ -29,4 +29,4 @@ options:
   logging: CLOUD_LOGGING_ONLY
  
 images:
-  - 'us-central1-docker.pkg.dev/${PROJECT_ID}/hui-f-gke-repo/frontend-image:${SHORT_SHA}'
+  - 'us-central1-docker.pkg.dev/${PROJECT_ID}/hui-f-gke-repo/bank-frontend:v1'
