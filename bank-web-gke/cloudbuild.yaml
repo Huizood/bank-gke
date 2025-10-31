@@ -6,7 +6,7 @@ steps:
           '-t', 
           'us-central1-docker.pkg.dev/${PROJECT_ID}/hui-feng-frontend-bank/frontend-image:${SHORT_SHA}',
           '--build-arg',
-          'REACT_APP_API_URL=http://34.23.232.166',
+          'REACT_APP_API_URL=http://34.138.161.248',
           '-f',
           'Dockerfile-before-https-first',
           '.']
