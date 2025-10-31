@@ -1,32 +1,26 @@
 steps:
-  
+  # Build frontend image
   - name: 'gcr.io/cloud-builders/docker'
-    args: [
-          'build',
-          '-t', 
-          'us-central1-docker.pkg.dev/${PROJECT_ID}/hui-f-gke-repo/bank-frontend:v1',
-          '--build-arg',
-          'REACT_APP_API_URL=http://34.23.232.166',
-          '-f',
-          'Dockerfile-before-https-first',
-          '.']
- 
-  
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'us-central1-docker.pkg.dev/${PROJECT_ID}/hui-f-gke-repo/bank-frontend:v1']
- 
-  
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: 'gcloud'
     args:
       [
-        'run', 'deploy', 'hf-bank-frontend',
-        '--image', 'us-central1-docker.pkg.dev/${PROJECT_ID}/hui-f-gke-repo/bank-frontend:v1',
-        '--region', 'us-central1',
-        '--allow-unauthenticated'      ]
- 
+        'build',
+        '-t',
+        'us-central1-docker.pkg.dev/${PROJECT_ID}/hui-f-gke-repo/bank-frontend:v1',
+        '-f',
+        'Dockerfile-before-https-first',
+        '.'
+      ]
+
+  # Push frontend image
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'push',
+        'us-central1-docker.pkg.dev/${PROJECT_ID}/hui-f-gke-repo/bank-frontend:v1'
+      ]
+
 options:
   logging: CLOUD_LOGGING_ONLY
- 
+
 images:
   - 'us-central1-docker.pkg.dev/${PROJECT_ID}/hui-f-gke-repo/bank-frontend:v1'
