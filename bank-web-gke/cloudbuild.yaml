@@ -6,6 +6,8 @@ steps:
         'build',
         '-t',
         'us-central1-docker.pkg.dev/${PROJECT_ID}/hui-f-gke-repo/bank-frontend:v1',
+        '--build-arg',
+        'REACT_APP_API_URL=http://34.23.232.166',
         '-f',
         'Dockerfile-before-https-first',
         '.'
